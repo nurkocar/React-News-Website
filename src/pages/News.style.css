@@ -1,3 +1,9 @@
+.newsContainer{
+    display: flex;
+    margin: 50px;
+    flex-direction: column;
+}
+
 .newsCard{
     display: flex;
     flex-direction: column;

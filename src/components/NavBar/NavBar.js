@@ -1,28 +1,26 @@
-import React, { useState, useContext } from 'react';
-import { Link } from 'react-router-dom';
+import React, {useContext} from "react";
+import { Link } from "react-router-dom";
 import {NewsContext} from '../../App';
+import "./NavBar.style.css"
 
+export const NavBar = () => {
 
+  const { categorySource, setSelectedCategory } = useContext(NewsContext);
 
-export default function Navbar() {
-
-    const {categorySource, setSelectedCategory} = useContext(NewsContext);
-
-    return (
-        <div>
-                {categorySource.map(
-                    (item, i) => (
-                        <Link
-                            key={i}
-                            style={{ paddingRight: 10 }}
-                            onClick={() => {
-                                setSelectedCategory(item.category);
-                            }
-                            }
-                            to='/'
-                        >{item.category}</Link>
-                    )
-                )}
-        </div>
-    )
+  return (
+    <div className="container">
+      {categorySource.map((item, i) => (
+        <Link
+          className="navBar"
+          key={i}
+          onClick={() => {
+            setSelectedCategory(item.category);
+          }}
+          to="/"
+        >
+          {item.category}
+        </Link>
+      ))}
+    </div>
+  )
 }

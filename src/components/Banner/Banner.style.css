@@ -1,0 +1,13 @@
+.bannerContainer{
+    display:flex; 
+    flex-direction:column; 
+    justify-content:center;
+    align-items:center;  
+}
+.bannerImage{
+    height:50vh;
+    align-self: center;
+}
+.bannerAnchor{
+    text-decoration: none;
+}

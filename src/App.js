@@ -1,10 +1,12 @@
-import './App.css';
-import React, { useState, createContext } from 'react'
-import Home from '../src/pages/Home';
-import { News } from './News';
-import NavBar from './components/NavBar/NavBar';
-import { BrowserRouter } from 'react-router-dom';
+import React, { useState, useEffect, createContext } from 'react';
+import axios from "axios";
 
+import { News } from './pages/News';
+import { NewsDetails } from './pages/NewsDetails';
+import {NavBar} from './components/NavBar/NavBar';
+import { BrowserRouter, Route, Switch } from 'react-router-dom';
+
+import './App.css';
 
 const categorySource = [
   {
@@ -41,14 +43,31 @@ export const NewsContext = createContext();
 
 function App() {
 
+  const [newsList, setNewsList] = useState([]);
   const [selectedCategory, setSelectedCategory] = useState('General');
-  console.log(selectedCategory);
+
+  const fetchNewsData = async () => {
+    const response = await axios.get(
+      `https://newsapi.org/v2/top-headlines?country=gb&category=${selectedCategory}&apiKey=ea737c44a9754725aa0b320aced48165`
+    );
+    setNewsList(response?.data?.articles);
+  };
+
+  useEffect(() => {
+    fetchNewsData();
+  }, [selectedCategory]);
+
+  console.log(newsList);
 
   return (
     <BrowserRouter>
-      <NewsContext.Provider value={{ categorySource, selectedCategory, setSelectedCategory }}>
+      <NewsContext.Provider value={{newsList, categorySource, selectedCategory, setSelectedCategory }}>
         <NavBar />
-        <News />
+        <Switch>
+          <Route path='/detail/:id' component={NewsDetails} exact />
+          <Route path='/' component={News} />
+        </Switch>
+
       </NewsContext.Provider>
     </BrowserRouter>
   );
