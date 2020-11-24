@@ -1,16 +1,26 @@
-import React, {useContext} from 'react';
-import {NewsCard} from "../NewsCard/NewsCard";
-import {NewsContext} from '../../App';
+import React, { useContext } from 'react';
+import { Link } from 'react-router-dom';
+import { NewsCard } from "../NewsCard/NewsCard";
 import './NewsList.style.css';
 
-export const NewsList = () => {
+export const NewsList = ({ newsList }) => {
 
-    const { newsList } = useContext(NewsContext);
 
     return (
         <div className="newsCard">
             {newsList?.map((news, index) => (
-                <NewsCard key={index} {...news} />
+                <Link
+                    to='/details'
+                    // onClick={() => {
+                    //     //console.log(news)
+                    //     setSelectedNews(news);
+                    // }}
+                >
+                    <NewsCard
+                        key={index}
+                        newsList={news}
+                    />
+                </Link>
             ))}
         </div>
     )

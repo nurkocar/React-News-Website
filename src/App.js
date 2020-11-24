@@ -1,7 +1,7 @@
 import React, { useState, useEffect, createContext } from 'react';
 import axios from "axios";
 
-import { News } from './pages/News';
+import { NewsBanner } from './pages/NewsBanner';
 import { NewsDetails } from './pages/NewsDetails';
 import {NavBar} from './components/NavBar/NavBar';
 import { BrowserRouter, Route, Switch } from 'react-router-dom';
@@ -45,6 +45,7 @@ function App() {
 
   const [newsList, setNewsList] = useState([]);
   const [selectedCategory, setSelectedCategory] = useState('General');
+  const [selectedNews, setSelectedNews] = useState([]);
 
   const fetchNewsData = async () => {
     const response = await axios.get(
@@ -52,22 +53,20 @@ function App() {
     );
     setNewsList(response?.data?.articles);
   };
-
+  console.log(newsList);
   useEffect(() => {
     fetchNewsData();
   }, [selectedCategory]);
 
-  console.log(newsList);
 
   return (
     <BrowserRouter>
-      <NewsContext.Provider value={{newsList, categorySource, selectedCategory, setSelectedCategory }}>
+      <NewsContext.Provider value={{newsList, setNewsList, categorySource, selectedCategory, setSelectedCategory, selectedNews, setSelectedNews }}>
         <NavBar />
         <Switch>
-          <Route path='/detail/:id' component={NewsDetails} exact />
-          <Route path='/' component={News} />
+          <Route path='/details' component={NewsDetails} exact />
+          <Route path='/' component={NewsBanner} />
         </Switch>
-
       </NewsContext.Provider>
     </BrowserRouter>
   );
