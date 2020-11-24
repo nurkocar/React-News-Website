@@ -14,6 +14,7 @@ export const NewsDetails = () => {
         <div className='newsContainer'>
             <div className='newsDetail'>
                 <h2 style = {{textAlign:'center'}}>{selectedNews?.title}</h2>
+                
                 {selectedNews?.urlToImage == undefined ?
                     <img src='https://vcunited.club/wp-content/uploads/2020/01/No-image-available-2.jpg' alt='Link Error' /> :
                     <img className='bannerImage' src={selectedNews?.urlToImage} alt='NewsImage' />
@@ -21,7 +22,7 @@ export const NewsDetails = () => {
 
                 <p style = {{textAlign:'center'}}>{selectedNews?.description}</p>
 
-                <Link style={{ textDecoration: 'none', paddingBottom:'20px' }} to={{ pathname: `${selectedNews.url}` }} target="_blank">Go to details...</Link>
+                <Link style={{ color: '#ab000d', fontWeight:'bold', textDecoration: 'none', paddingBottom:'20px' }} to={{ pathname: `${selectedNews.url}` }} target="_blank">Go to details...</Link>
 
             </div>
 

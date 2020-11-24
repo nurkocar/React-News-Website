@@ -24,7 +24,7 @@ export const NewsBanner = () => {
             setSelectedNews(news);
           }}
         >
-          <h3 style={{ textAlign: 'center' }}>{selectedCategory} News</h3>
+          <h2 style={{ color:'#ab000d', textAlign: 'center' }}>{selectedCategory} News</h2>
           <div
             className='bannerContainer'
             key={index}
