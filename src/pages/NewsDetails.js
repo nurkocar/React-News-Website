@@ -2,6 +2,7 @@ import React, { useContext } from 'react';
 import { NewsList } from '../components/NewsList/NewsList';
 import { NewsContext } from '../App';
 import "./NewsDetails.style.css";
+import { Link } from 'react-router-dom';
 
 export const NewsDetails = () => {
 
@@ -12,14 +13,22 @@ export const NewsDetails = () => {
     return (
         <div className='newsContainer'>
             <div className='newsDetail'>
-                <h2>{selectedNews?.title}</h2>
-                <img className='newsImage' src={selectedNews?.urlToImage} alt={'News Details'} />
-                <p>{selectedNews?.content}</p>
+                <h2 style = {{textAlign:'center'}}>{selectedNews?.title}</h2>
+                {selectedNews?.urlToImage == undefined ?
+                    <img src='https://vcunited.club/wp-content/uploads/2020/01/No-image-available-2.jpg' alt='Link Error' /> :
+                    <img className='bannerImage' src={selectedNews?.urlToImage} alt='NewsImage' />
+                }
+
+                <p style = {{textAlign:'center'}}>{selectedNews?.description}</p>
+
+                <Link style={{ textDecoration: 'none', paddingBottom:'20px' }} to={{ pathname: `${selectedNews.url}` }} target="_blank">Go to details...</Link>
+
             </div>
-            <div className = 'newsCardContainer'>
+
+            <div className='newsCardContainer'>
                 <h3>Other {selectedCategory} News</h3>
                 <div className='newsCard'>
-                    <NewsList newsList={newsList} setSelectedNews = {setSelectedNews}/>
+                    <NewsList newsList={newsList} setSelectedNews={setSelectedNews} />
                 </div>
             </div>
 
