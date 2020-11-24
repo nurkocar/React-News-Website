@@ -5,21 +5,21 @@ import "./NewsDetails.style.css";
 
 export const NewsDetails = () => {
 
-    const { newsList, selectedNews, selectedCategory } = useContext(NewsContext);
+    const { newsList, setSelectedNews, selectedNews, selectedCategory } = useContext(NewsContext);
     console.log(selectedNews);
 
 
     return (
         <div className='newsContainer'>
             <div className='newsDetail'>
-                <h1>{selectedNews?.title}</h1>
+                <h2>{selectedNews?.title}</h2>
                 <img className='newsImage' src={selectedNews?.urlToImage} alt={'News Details'} />
-                <p>{selectedNews?.description}</p>
+                <p>{selectedNews?.content}</p>
             </div>
             <div className = 'newsCardContainer'>
                 <h3>Other {selectedCategory} News</h3>
                 <div className='newsCard'>
-                    <NewsList newsList={newsList}/>
+                    <NewsList newsList={newsList} setSelectedNews = {setSelectedNews}/>
                 </div>
             </div>
 
