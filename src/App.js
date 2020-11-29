@@ -49,7 +49,7 @@ function App() {
 
   const fetchNewsData = async () => {
     const response = await axios.get(
-      `https://newsapi.org/v2/top-headlines?country=gb&category=${selectedCategory}&apiKey=ea737c44a9754725aa0b320aced48165`
+      `https://newsapi.org/v2/top-headlines?country=gb&category=${selectedCategory}&apiKey=xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx` // YOUR API KEY
     );
     setNewsList(response?.data?.articles);
   };
